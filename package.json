@@ -2,7 +2,7 @@
   "name": "lmv-4",
   "version": "1.0.0",
   "description": "lab work #4 - lmv",
-  "main": "app/script.js",
+  "main": "script.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

@@ -6,9 +6,9 @@ export default defineConfig({
     outDir: 'dist',
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'app/pages/index.html'),
-        about: resolve(__dirname, 'app/pages/about-us.html'),
-        achievements: resolve(__dirname, 'app/pages/achievements.html'),
+        main: resolve(__dirname, 'index.html'),
+        about: resolve(__dirname, 'about-us.html'),
+        achievements: resolve(__dirname, 'achievements.html'),
       },
     },
   },
