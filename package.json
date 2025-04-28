@@ -2,9 +2,10 @@
   "name": "lmv-4",
   "version": "1.0.0",
   "description": "lab work #4 - lmv",
-  "main": "script.js",
+  "main": "app/script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"No build step required\" && exit 0"
   },
   "repository": {
     "type": "git",
