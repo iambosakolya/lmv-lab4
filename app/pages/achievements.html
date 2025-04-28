@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FC Temp | Футбольний клуб</title>
+    <meta
+      name="description"
+      content="Футбольна команда з України, готова змагатися, конкурувати та прагнути до перемоги."
+    />
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="icon" href="../favicon.png" type="image/png" />
+
+    <!-- Tailwind config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            screens: {
+              md: '992px',
+              lg: '1200px',
+            },
+            colors: {
+              'gray-100': '#F2F4F5',
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="font-craftwork bg-white text-black">
+    <!-- Header -->
+    <header class="bg-gray-100 py-4">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between">
+          <div class="text-xl font-bold">
+            <a href="/">LOGO</a>
+          </div>
+
+          <!-- Mobile menu button -->
+          <button id="mobile-menu-button" class="md:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+
+          <!-- Desktop navigation -->
+          <nav class="hidden md:flex items-center space-x-6">
+            <a href="main.html" class="hover:text-gray-600">ГОЛОВНА</a>
+            <a href="about-us.html" class="hover:text-gray-600">ПРО НАС</a>
+            <a href="achievements.html" class="hover:text-gray-600"
+              >ДОСЯГНЕННЯ</a
+            >
+            <a href="#" class="hover:text-gray-600">СТАТИСТИКА МАТЧІВ</a>
+            <div class="flex items-center ml-4">
+              <button class="flex items-center">
+                <span>UA</span>
+              </button>
+            </div>
+          </nav>
+        </div>
+
+        <!-- Mobile navigation -->
+        <nav
+          id="mobile-menu"
+          class="hidden mt-4 md:hidden flex flex-col space-y-4"
+        >
+          <a href="main.html" class="hover:text-gray-600">ГОЛОВНА</a>
+          <a href="about-us.html" class="hover:text-gray-600">ПРО НАС</a>
+          <a href="achievements.html" class="hover:text-gray-600">ДОСЯГНЕННЯ</a>
+          <a href="#" class="hover:text-gray-600">СТАТИСТИКА МАТЧІВ</a>
+          <div class="flex items-center mt-4">
+            <button class="flex items-center">
+              <span>UA</span>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-12 bg-white">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+          we. are. fc.TEMP.
+        </h1>
+        <p class="text-lg mb-8 max-w-2xl mx-auto">
+          Football team from Ukraine to the world. Ready to compete, conquer,
+          and rise to glory.
+        </p>
+        <div
+          class="w-full h-64 md:h-96 bg-gray-200 flex items-center justify-center"
+        >
+          <img
+            src="https://placehold.co/1400x720/png"
+            alt="FC Temp team"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <!-- Buttons -->
+      <div class="flex justify-center gap-4 mt-4">
+        <a
+          href="#"
+          class="bg-white border border-black px-6 py-2 inline-block hover:bg-gray-100 transition-colors"
+        >
+          Дізнатись
+        </a>
+        <a
+          href="#"
+          class="bg-white border border-black px-6 py-2 inline-block hover:bg-gray-100 transition-colors flex items-center"
+        >
+          Зв'язатися
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 ml-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Club History Intro Section -->
+    <section class="py-12 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row gap-8">
+          <div class="md:w-1/3">
+            <h2 class="text-2xl font-bold mb-6">
+              Святкуємо наші історичні перемоги
+            </h2>
+            <p class="mb-4">
+              Пишаємо тим, чого вдалося досягти в короткий термін.
+            </p>
+            <p class="mb-4">Ми прагнемо нових досягнень та перемог.</p>
+            <p class="mb-8">Наша команда - це наша гордість.</p>
+            <a
+              href="#"
+              class="border border-black px-4 py-2 inline-block hover:bg-gray-100 transition-colors"
+              >Learn More</a
+            >
+            <a
+              href="#"
+              class="ml-4 border border-black px-4 py-2 inline-block hover:bg-gray-100 transition-colors"
+              >Архіви</a
+            >
+          </div>
+          <div class="md:w-2/3 bg-gray-100 p-8 relative">
+            <div class="flex flex-col md:flex-row">
+              <div class="md:w-1/2 p-4">
+                <p class="text-sm mb-4">
+                  Футбольний клуб Темп був заснований у 2010 році з метою
+                  розвитку футбольної культури в регіоні. Протягом короткого
+                  часу наша команда змогла піднятися з нижчих дивізіонів до
+                  вищої ліги. Кожен сезон приносив нові досягнення, перемоги та
+                  рекорди. Ми пишаємося кожним кроком на шляху до успіху.
+                </p>
+              </div>
+              <div class="md:w-1/2 flex items-center justify-center">
+                <img src="https://placehold.co/500x300/png" alt="our photo" />
+              </div>
+            </div>
+            <div class="flex mt-4">
+              <a
+                href="#"
+                class="bg-white px-4 py-2 inline-block hover:bg-gray-100 transition-colors"
+                >Дізнатися</a
+              >
+              <a href="#" class="ml-2 flex items-center text-sm">
+                Детальніше
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4 ml-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-2xl font-bold mb-12 md:text-center">Achievements</h2>
+
+        <div class="relative">
+          <!-- Timeline line -->
+          <div class="timeline-line"></div>
+
+          <!-- 2023 Achievement -->
+          <div class="relative mb-24">
+            <div class="timeline-dot"></div>
+            <div class="flex flex-col md:flex-row md:items-center">
+              <div
+                class="md:w-1/2 md:pr-12 md:text-right pl-12 md:pl-0 mb-6 md:mb-0"
+              >
+                <h3 class="text-xl font-bold">2023</h3>
+                <h4 class="text-2xl font-bold mb-2">Championship Title Won</h4>
+                <p class="mb-4">
+                  In 2023, our team clinched the championship title with an
+                  outstanding performance.
+                </p>
+                <div class="flex md:justify-end">
+                  <a
+                    href="#"
+                    class="border border-black px-4 py-1 text-sm inline-block hover:bg-gray-100 transition-colors"
+                    >Details</a
+                  >
+                  <a
+                    href="#"
+                    class="ml-2 border border-black px-4 py-1 text-sm inline-block hover:bg-gray-100 transition-colors"
+                    >View</a
+                  >
+                </div>
+              </div>
+              <div class="md:w-1/2 md:pl-12 pl-12 md:pl-12">
+                <!-- Empty space for desktop layout -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 2022 Achievement -->
+          <div class="relative mb-24">
+            <div class="timeline-dot"></div>
+            <div class="flex flex-col md:flex-row md:items-center">
+              <div class="md:w-1/2 md:pr-12 md:text-right hidden md:block">
+                <!-- Empty space for desktop layout -->
+              </div>
+              <div class="md:w-1/2 md:pl-12 pl-12">
+                <h3 class="text-xl font-bold">2022</h3>
+                <h4 class="text-2xl font-bold mb-2">Record-Breaking Season</h4>
+                <p class="mb-4">
+                  The 2022 season was remarkable, with our team breaking
+                  records, championing our league's exceptional talent and
+                  dedication.
+                </p>
+                <div class="flex">
+                  <a
+                    href="#"
+                    class="border border-black px-4 py-1 text-sm inline-block hover:bg-gray-100 transition-colors"
+                    >Highlights</a
+                  >
+                  <a
+                    href="#"
+                    class="ml-2 border border-black px-4 py-1 text-sm inline-block hover:bg-gray-100 transition-colors"
+                    >Discover</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2021 Achievement -->
+          <div class="relative mb-24">
+            <div class="timeline-dot"></div>
+            <div class="flex flex-col md:flex-row md:items-center">
+              <div
+                class="md:w-1/2 md:pr-12 md:text-right pl-12 md:pl-0 mb-6 md:mb-0"
+              >
+                <h3 class="text-xl font-bold">2021</h3>
+                <h4 class="text-2xl font-bold mb-2">Historic Match Victory</h4>
+                <p class="mb-4">
+                  In 2021, we witnessed a memorable victory against our rivals,
+                  solidifying our place in club history.
+                </p>
+                <div class="flex md:justify-end">
+                  <a
+                    href="#"
+                    class="border border-black px-4 py-1 text-sm inline-block hover:bg-gray-100 transition-colors"
+                    >Replay</a
+                  >
+                  <a
+                    href="#"
+                    class="ml-2 border border-black px-4 py-1 text-sm inline-block hover:bg-gray-100 transition-colors"
+                    >Watch</a
+                  >
+                </div>
+              </div>
+              <div class="md:w-1/2 md:pl-12 pl-12 md:pl-12">
+                <!-- Empty space for desktop layout -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 2020 Achievement -->
+          <div class="relative mb-24">
+            <div class="timeline-dot"></div>
+            <div class="flex flex-col md:flex-row md:items-center">
+              <div class="md:w-1/2 md:pr-12 md:text-right hidden md:block">
+                <!-- Empty space for desktop layout -->
+              </div>
+              <div class="md:w-1/2 md:pl-12 pl-12">
+                <h3 class="text-xl font-bold">2020</h3>
+                <h4 class="text-2xl font-bold mb-2">
+                  Trophy Celebration Event
+                </h4>
+                <p class="mb-4">
+                  Our trophy celebration event in 2020 brought together fans and
+                  players alike to commemorate our achievements.
+                </p>
+                <div class="flex">
+                  <a
+                    href="#"
+                    class="border border-black px-4 py-1 text-sm inline-block hover:bg-gray-100 transition-colors"
+                    >Join</a
+                  >
+                  <a
+                    href="#"
+                    class="ml-2 border border-black px-4 py-1 text-sm inline-block hover:bg-gray-100 transition-colors"
+                    >Participate</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Club History Section - Updated to match the image -->
+    <section class="bg-white">
+      <div class="container mx-auto px-4">
+        <div class="mb-6">
+          <p class="text-sm uppercase font-medium text-gray-600">
+            Achievements
+          </p>
+          <h2 class="text-3xl font-bold">
+            Святкуємо історичні перемоги нашого клубу
+          </h2>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-8 mt-8">
+          <div class="md:w-1/2">
+            <div class="mb-8">
+              <h3 class="font-bold mb-2">Трофейна зала</h3>
+              <p class="text-sm text-gray-600">
+                Наші найвизначніші трофеї та нагороди, які ми здобули за роки
+                існування клубу. Кожен трофей - це історія перемоги та
+                досягнень.
+              </p>
+            </div>
+
+            <div class="mb-8">
+              <h3 class="font-bold mb-2">Наші Рекорди</h3>
+              <p class="text-sm text-gray-600">
+                Рекорди, які встановили наші гравці та команда протягом усієї
+                історії клубу. Ми пишаємося кожним досягненням.
+              </p>
+            </div>
+
+            <div class="flex gap-4 mt-6">
+              <a
+                href="#"
+                class="border border-black px-4 py-2 inline-block hover:bg-gray-100 transition-colors"
+                >Learn More</a
+              >
+              <a
+                href="#"
+                class="border border-black px-4 py-2 inline-block hover:bg-gray-100 transition-colors flex items-center"
+              >
+                Sign In
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4 ml-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="md:w-1/2 flex items-center justify-center">
+            <img
+              src="https://placehold.co/600x400/png"
+              alt="FC Temp team"
+              class="object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white py-8 border-t border-gray-200">
+      <div class="container mx-auto px-4">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center mb-8"
+        >
+          <div class="mb-4 md:mb-0">
+            <a href="/" class="text-xl font-bold">Logo</a>
+          </div>
+          <nav class="flex flex-wrap gap-6">
+            <a href="main.html" class="hover:underline">Головна сторінка</a>
+            <a href="about-us.html" class="hover:underline">Про команду</a>
+            <a href="achievements.html" class="hover:underline"
+              >Наші досягнення</a
+            >
+            <a href="#" class="hover:underline">Статистика матчів</a>
+            <a href="#" class="hover:underline">Контакти</a>
+          </nav>
+          <div class="flex space-x-4 mt-4 md:mt-0">
+            <a href="#" class="hover:text-gray-600">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-facebook"
+              >
+                <path
+                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                ></path>
+              </svg>
+            </a>
+            <a href="#" class="hover:text-gray-600">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-instagram"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path
+                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a href="#" class="hover:text-gray-600">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-twitter"
+              >
+                <path
+                  d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
+                ></path>
+              </svg>
+            </a>
+            <a href="#" class="hover:text-gray-600">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-youtube"
+              >
+                <path
+                  d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"
+                ></path>
+                <polygon
+                  points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"
+                ></polygon>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-200 pt-6 text-sm text-gray-500">
+          <div class="flex flex-col md:flex-row justify-between">
+            <p>&copy; 2025 Темп. Всі права захищені.</p>
+            <div class="flex space-x-4 mt-2 md:mt-0">
+              <a href="#" class="hover:underline">Політика конфіденційності</a>
+              <a href="#" class="hover:underline">Умови обслуговування</a>
+              <a href="#" class="hover:underline">Налаштування Cookie</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../script.js"></script>
+  </body>
+</html>
