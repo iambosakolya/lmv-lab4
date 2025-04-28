@@ -4,8 +4,9 @@
   "description": "lab work #4 - lmv",
   "main": "app/script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo \"No build step required\" && exit 0"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/iambosakolya/lmv-lab4/issues"
   },
-  "homepage": "https://github.com/iambosakolya/lmv-lab4#readme"
+  "homepage": "https://github.com/iambosakolya/lmv-lab4#readme",
+  "devDependencies": {
+   "vite": "^6.3.3"
+  }
 }

@@ -1,8 +1,0 @@
-{
-  "routes": [
-    { "src": "/", "dest": "/app/pages/index.html" },
-    { "src": "/about-us", "dest": "/app/pages/about-us.html" },
-    { "src": "/achievements", "dest": "/app/pages/achievements.html" },
-    { "handle": "filesystem" }
-  ]
-}
