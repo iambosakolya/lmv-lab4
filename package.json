@@ -2,11 +2,22 @@
   "name": "lmv-4",
   "version": "1.0.0",
   "description": "lab work #4 - lmv",
-  "main": "script.js",
+  "main": "index.js",
+  "dependencies": {
+    "esbuild": "^0.25.3",
+    "fdir": "^6.4.4",
+    "nanoid": "^3.3.11",
+    "picocolors": "^1.1.1",
+    "picomatch": "^4.0.2",
+    "postcss": "^8.5.3",
+    "rollup": "^4.40.1",
+    "source-map-js": "^1.2.1",
+    "tinyglobby": "^0.2.13",
+    "vite": "^6.3.3"
+  },
+  "devDependencies": {},
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -17,8 +28,5 @@
   "bugs": {
     "url": "https://github.com/iambosakolya/lmv-lab4/issues"
   },
-  "homepage": "https://github.com/iambosakolya/lmv-lab4#readme",
-  "devDependencies": {
-   "vite": "^6.3.3"
-  }
+  "homepage": "https://github.com/iambosakolya/lmv-lab4#readme"
 }
