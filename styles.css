@@ -1,8 +1,7 @@
-/* Custom font import */
+/* Custom font import with optimized loading */
 @font-face {
   font-family: 'Craftwork Grotesk';
-  src: url('./fonts/craftwork-grotesk/CraftworkGrotesk-Regular.ttf')
-    format('truetype');
+  src: url('./fonts/craftwork-grotesk/CraftworkGrotesk-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -10,8 +9,7 @@
 
 @font-face {
   font-family: 'Craftwork Grotesk';
-  src: url('./fonts/craftwork-grotesk/CraftworkGrotesk-Medium.ttf')
-    format('truetype');
+  src: url('./fonts/craftwork-grotesk/CraftworkGrotesk-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -19,28 +17,25 @@
 
 @font-face {
   font-family: 'Craftwork Grotesk';
-  src: url('./fonts/craftwork-grotesk/CraftworkGrotesk-Heavy.ttf')
-    format('truetype');
+  src: url('./fonts/craftwork-grotesk/CraftworkGrotesk-Heavy.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
-/* Base styles */
+/* Critical CSS - Base styles that are needed immediately */
 body {
   font-family: 'Craftwork Grotesk', sans-serif;
-  min-width: 320px; /* Prevent horizontal scroll on small devices */
+  min-width: 320px;
   overflow-x: hidden;
+  line-height: 1.5;
+  color: #000;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Craftwork Grotesk', sans-serif;
   font-weight: 700;
+  line-height: 1.2;
 }
 
 /* Custom utility classes */
@@ -48,29 +43,27 @@ h6 {
   font-family: 'Craftwork Grotesk', sans-serif;
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+/* Smooth scrolling - Add only to non-reduced motion users */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
-/* Form focus styles */
+/* Form focus styles - Important for accessibility */
 input:focus,
 textarea:focus,
 select:focus {
-  outline: none;
-  border-color: #000;
+  outline: 2px solid #000;
+  outline-offset: 1px;
 }
 
-/* Button hover effects */
-.hover-grow {
-  transition: transform 0.2s ease;
+/* Ensure all text is at least 14px for readability */
+body, p, a, span, div, input, select, textarea, button {
+  font-size: 14px;
 }
 
-.hover-grow:hover {
-  transform: scale(1.05);
-}
-
-/* Mobile touchable elements - minimum size for all touchable elements */
+/* Mobile touchable elements - Minimum 44px size for touch targets */
 button, 
 a.btn, 
 a[href], 
@@ -95,17 +88,7 @@ select {
   border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
-/* Ensure all text is at least 12px */
-body, p, a, span, div, input, select, textarea, button {
-  font-size: 14px;
-}
-
-/* Improved button spacing for mobile touch */
-.flex.space-x-4 > * {
-  margin-right: 12px;
-}
-
-/* Better tap areas for buttons on mobile */
+/* Mobile optimizations */
 @media (max-width: 576px) {
   a[href], button {
     padding: 12px 16px;
@@ -131,46 +114,7 @@ body, p, a, span, div, input, select, textarea, button {
     padding-right: 16px;
   }
   
-  /* Fix for Join Section */
-  section.py-16.bg-gray-100 .container {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-  
   /* Gallery responsiveness fixes */
-  .grid.grid-cols-2 {
-    grid-template-columns: 1fr !important;
-  }
-  
-  .grid.grid-cols-2 .row-span-2 {
-    grid-row: span 1;
-  }
-  
-  .grid.grid-cols-2 .row-span-2.bg-gray-200 {
-    height: 300px !important;
-  }
-  
-  .grid.grid-cols-2 .grid.grid-rows-2 {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  .grid.grid-cols-2 .grid.grid-rows-2 > div {
-    height: 250px !important;
-  }
-  
-  section.py-16 {
-    padding-top: 40px;
-    padding-bottom: 40px;
-  }
-  
-  /* Fix height for images on mobile */
-  .row-span-2.bg-gray-200.h-\[815px\] {
-    height: 400px;
-  }
-  
-  /* Gallery specific mobile styles */
   .gallery-grid {
     grid-template-columns: 1fr;
     gap: 16px;
@@ -190,6 +134,11 @@ body, p, a, span, div, input, select, textarea, button {
   .gallery-side-images > div {
     height: 250px !important;
   }
+  
+  section.py-16 {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
 }
 
 /* Make phone numbers clickable with proper styling */
@@ -200,6 +149,7 @@ a[href^="tel"] {
   padding: 6px 0;
 }
 
+/* Timeline elements */
 .timeline-dot {
   width: 12px;
   height: 12px;
@@ -220,7 +170,7 @@ a[href^="tel"] {
   bottom: 0;
 }
 
-/* Mobile optimizations */
+/* Mobile timeline adjustments */
 @media (max-width: 991px) {
   .timeline-dot {
     left: 20px;
@@ -247,43 +197,43 @@ a[href^="tel"] {
     font-size: 24px;
     line-height: 1.3;
   }
-  
-  h3 {
-    font-size: 20px;
-    line-height: 1.3;
-  }
 }
 
-/* Fixed bottom navigation for mobile devices */
+/* Mobile bottom navigation */
 .mobile-bottom-nav {
-  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  z-index: 100;
 }
 
+/* Mobile bottom nav styling */
 @media (max-width: 576px) {
   .mobile-bottom-nav {
     display: flex;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: white;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-    z-index: 1000;
   }
   
   .mobile-bottom-nav a {
-    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 8px 0;
-    text-decoration: none;
-    color: black;
     font-size: 12px;
+    color: #000;
+    text-decoration: none;
+    width: 25%;
+    padding: 8px 0;
   }
   
   .mobile-bottom-nav svg {
-    margin-bottom: 4px;
+    margin-bottom: 5px;
+    width: 20px;
+    height: 20px;
   }
   
   /* Add padding to body to account for fixed nav */
@@ -292,85 +242,31 @@ a[href^="tel"] {
   }
 }
 
-/* Gallery styles */
+/* Gallery styling */
 .gallery-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 1rem;
 }
 
 .gallery-main-image {
   grid-row: span 2;
   height: 500px;
-  overflow: hidden;
 }
 
 .gallery-side-images {
   display: grid;
   grid-template-rows: 1fr 1fr;
-  gap: 16px;
+  gap: 1rem;
 }
 
 .gallery-side-images > div {
   height: 240px;
-  overflow: hidden;
 }
 
-/* Стилі для зображень без рамок */
 .gallery-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-/* Видаляємо колір фону для зображень */
-.gallery-grid img {
-  background-color: transparent;
-}
-
-@media (max-width: 576px) {
-  /* Gallery specific mobile styles */
-  .gallery-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  
-  .gallery-main-image {
-    grid-row: span 1;
-    height: 300px !important;
-  }
-  
-  .gallery-side-images {
-    grid-template-rows: auto;
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  
-  .gallery-side-images > div {
-    height: 250px !important;
-  }
-  
-  /* Mobile button styles */
-  a[href], button {
-    padding: 12px 16px;
-    margin-bottom: 8px;
-  }
-  
-  /* Fix padding for mobile layout */
-  .container {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-  
-  /* Fix for Join Section */
-  section.py-16.bg-gray-100 .container {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-  
-  /* Improved spacing for sections */
-  section.py-16 {
-    padding-top: 40px;
-    padding-bottom: 40px;
-  }
+  display: block;
 }

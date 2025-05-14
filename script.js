@@ -1,309 +1,259 @@
-// Mobile menu toggle and touch optimizations
-document.addEventListener('DOMContentLoaded', function () {
-  // Mobile menu functionality with improved touch handling
+// IIFE to avoid global scope pollution and improve performance
+(function() {
+  'use strict';
+
+  // Cache DOM elements for better performance
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
   const body = document.body;
-
-  // Close menu when clicking outside
-  document.addEventListener('click', function(event) {
-    const isMenuButton = mobileMenuButton.contains(event.target);
-    const isMenuContent = mobileMenu.contains(event.target);
-    
-    if (!isMenuButton && !isMenuContent && !mobileMenu.classList.contains('hidden')) {
-      mobileMenu.classList.add('hidden');
-      mobileMenu.classList.remove('flex');
-      
-      // Change back to menu icon
-      mobileMenuButton.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      `;
-      
-      // Re-enable scrolling
-      body.style.overflow = '';
+  
+  // Function to toggle mobile menu with improved performance
+  function toggleMobileMenu(event) {
+    if (event) {
+      event.stopPropagation();
     }
-  });
-
-  mobileMenuButton.addEventListener('click', function (event) {
-    event.stopPropagation(); // Prevent the document click event from firing
     
-    // Toggle the 'hidden' class
-    if (mobileMenu.classList.contains('hidden')) {
+    const isHidden = mobileMenu.classList.contains('hidden');
+    
+    // Set ARIA attributes for accessibility
+    mobileMenuButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+    
+    if (isHidden) {
       mobileMenu.classList.remove('hidden');
       mobileMenu.classList.add('flex');
-      
-      // Disable scrolling when menu is open
       body.style.overflow = 'hidden';
 
-      // Change the menu icon to X
       mobileMenuButton.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       `;
     } else {
       mobileMenu.classList.add('hidden');
       mobileMenu.classList.remove('flex');
-      
-      // Re-enable scrolling
       body.style.overflow = '';
 
-      // Change back to menu icon
       mobileMenuButton.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       `;
     }
-  });
+  }
 
-  // Close mobile menu when menu item is clicked
-  const mobileMenuItems = mobileMenu.querySelectorAll('a');
-  mobileMenuItems.forEach(item => {
-    item.addEventListener('click', () => {
-      mobileMenu.classList.add('hidden');
-      mobileMenu.classList.remove('flex');
-      
-      // Re-enable scrolling
-      body.style.overflow = '';
-      
-      // Change back to menu icon
-      mobileMenuButton.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      `;
+  // Close menu when clicking outside
+  function handleDocumentClick(event) {
+    if (!mobileMenuButton.contains(event.target) && 
+        !mobileMenu.contains(event.target) && 
+        !mobileMenu.classList.contains('hidden')) {
+      toggleMobileMenu();
+    }
+  }
+
+  // Handle form submissions with better performance
+  function handleFormSubmission(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const submitButton = form.querySelector('button[type="submit"]');
+    
+    // Disable button to prevent multiple submissions
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Відправляється...';
+    }
+
+    // Create FormData object for sending
+    const formData = new FormData(form);
+    const formDataObj = {};
+    formData.forEach((value, key) => {
+      formDataObj[key] = value;
     });
-  });
 
-  // Form submission with mobile optimizations
-  const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    // Auto-format phone number for better mobile experience
-    const phoneInput = document.getElementById('phone');
-    if (phoneInput) {
-      phoneInput.addEventListener('input', function(e) {
-        // Format phone number 
-        let value = e.target.value.replace(/\D/g, '');
-        if (value.length > 0) {
-          if (value.length <= 3) {
-            value = value;
-          } else if (value.length <= 6) {
-            value = value.slice(0, 3) + '-' + value.slice(3);
-          } else if (value.length <= 10) {
-            value = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6);
-          } else {
-            value = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6, 10);
-          }
-        }
-        e.target.value = value;
-      });
-    }
-
-    contactForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      // Disable form submission button to prevent double submissions
-      const submitButton = contactForm.querySelector('button[type="submit"]');
+    // Simulate server delay (would be replaced with actual server request)
+    setTimeout(() => {
+      alert("Дякуємо за вашу заявку! Ми зв'яжемося з вами найближчим часом.");
+      form.reset();
+      
       if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.textContent = 'Відправляється...';
+        submitButton.disabled = false;
+        submitButton.textContent = 'Відправити заявку';
+      }
+    }, 1000);
+  }
+
+  // Format phone number for better UX
+  function formatPhoneNumber(event) {
+    let value = event.target.value.replace(/\D/g, '');
+    
+    if (value.length > 0) {
+      if (value.length <= 3) {
+        value = value;
+      } else if (value.length <= 6) {
+        value = value.slice(0, 3) + '-' + value.slice(3);
+      } else if (value.length <= 10) {
+        value = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6);
+      } else {
+        value = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6, 10);
+      }
+    }
+    
+    event.target.value = value;
+  }
+
+  // Smooth scroll implementation with better performance
+  function handleSmoothScroll(event) {
+    event.preventDefault();
+
+    const targetId = this.getAttribute('href');
+    if (targetId === '#') return;
+
+    const targetElement = document.querySelector(targetId);
+    if (targetElement) {
+      // Close mobile menu if open
+      if (!mobileMenu.classList.contains('hidden')) {
+        toggleMobileMenu();
       }
 
-      // Get form data
-      const formData = new FormData(contactForm);
-      const formDataObj = {};
-      formData.forEach((value, key) => {
-        formDataObj[key] = value;
+      // Calculate position with offset for fixed headers
+      const offset = 60;
+      const elementPosition = targetElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
       });
-
-      // Here you would typically send the data to your server
-      console.log('Form data:', formDataObj);
-
-      // Simulate server delay for better UX feedback
-      setTimeout(() => {
-        // Show success message
-        alert("Дякуємо за вашу заявку! Ми зв'яжемося з вами найближчим часом.");
-
-        // Reset form
-        contactForm.reset();
-        
-        // Re-enable submit button
-        if (submitButton) {
-          submitButton.disabled = false;
-          submitButton.textContent = 'Відправити заявку';
-        }
-      }, 1000);
-    });
+    }
   }
 
-  // Set current year in footer
-  const currentYearElement = document.getElementById('current-year');
-  if (currentYearElement) {
-    currentYearElement.textContent = new Date().getFullYear();
-  }
-
-  // Make phone numbers clickable
-  const makePhoneNumbersClickable = () => {
-    // Find all phone number elements that should be clickable
-    const phoneElements = document.querySelectorAll('.phone-number');
-    phoneElements.forEach(element => {
-      const phoneNumber = element.textContent.trim().replace(/[^\d+]/g, '');
-      if (phoneNumber) {
-        const phoneLink = document.createElement('a');
-        phoneLink.href = `tel:${phoneNumber}`;
-        phoneLink.className = element.className;
-        phoneLink.textContent = element.textContent;
-        element.parentNode.replaceChild(phoneLink, element);
-      }
-    });
-  };
-  makePhoneNumbersClickable();
-
-  // Fix for touch delay on mobile devices
-  const removeTouchDelay = () => {
-    // Add role="button" to clickable elements for better accessibility
+  // Enhance accessibility by making interactive elements more accessible
+  function enhanceAccessibility() {
+    // Add role="button" to clickable elements
     document.querySelectorAll('a[href], button').forEach(el => {
       if (!el.hasAttribute('role')) {
         el.setAttribute('role', 'button');
       }
     });
-  };
-  removeTouchDelay();
-
-  // Smooth scroll for anchor links with improved mobile experience
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-
-      const targetId = this.getAttribute('href');
-      if (targetId === '#') return;
-
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        // Close mobile menu if open
-        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-          mobileMenu.classList.add('hidden');
-          mobileMenu.classList.remove('flex');
-          body.style.overflow = '';
-        }
-
-        // Offset for fixed headers
-        const offset = 60; // Adjust based on your header height
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth',
-        });
-      }
-    });
-  });
-
-  // Add bottom navigation for mobile
-  const addBottomNav = () => {
-    // Check if mobile bottom nav already exists
-    if (document.querySelector('.mobile-bottom-nav')) return;
-
+  }
+  
+  // Add mobile bottom navigation
+  function addBottomNav() {
+    if (document.querySelector('.mobile-bottom-nav') || window.innerWidth > 576) {
+      return;
+    }
+    
     const bottomNav = document.createElement('div');
     bottomNav.className = 'mobile-bottom-nav';
     bottomNav.innerHTML = `
-      <a href="./index.html">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <a href="./index.html" aria-label="Головна сторінка">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
           <polyline points="9 22 9 12 15 12 15 22"></polyline>
         </svg>
         <span>Головна</span>
       </a>
-      <a href="./about-us.html">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <a href="./about-us.html" aria-label="Про нас">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="10"></circle>
           <line x1="12" y1="16" x2="12" y2="12"></line>
           <line x1="12" y1="8" x2="12.01" y2="8"></line>
         </svg>
         <span>Про нас</span>
       </a>
-      <a href="./achievements.html">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <a href="./achievements.html" aria-label="Досягнення">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
         </svg>
         <span>Досягнення</span>
       </a>
-      <a href="#signup-form">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <a href="#signup-form" aria-label="Контакти">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
           <polyline points="22,6 12,13 2,6"></polyline>
         </svg>
         <span>Контакти</span>
       </a>
     `;
+    
     document.body.appendChild(bottomNav);
-  };
-  
-  // Only add bottom nav on small screens
-  if (window.innerWidth <= 576) {
-    addBottomNav();
   }
-  
-  // Handle resize events to show/hide bottom nav
-  window.addEventListener('resize', function() {
-    if (window.innerWidth <= 576) {
-      addBottomNav();
-    } else {
-      const bottomNav = document.querySelector('.mobile-bottom-nav');
-      if (bottomNav) {
-        bottomNav.style.display = 'none';
+
+  // Event delegation for better performance - attach events only when DOM is ready
+  function init() {
+    // Mobile menu toggle
+    if (mobileMenuButton) {
+      mobileMenuButton.addEventListener('click', toggleMobileMenu);
+      document.addEventListener('click', handleDocumentClick);
+      
+      // Close mobile menu when menu item is clicked
+      const mobileMenuItems = mobileMenu.querySelectorAll('a');
+      mobileMenuItems.forEach(item => {
+        item.addEventListener('click', toggleMobileMenu);
+      });
+    }
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', handleSmoothScroll);
+    });
+    
+    // Contact form handling
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', handleFormSubmission);
+      
+      // Phone number formatting
+      const phoneInput = document.getElementById('phone');
+      if (phoneInput) {
+        phoneInput.addEventListener('input', formatPhoneNumber);
       }
     }
-  });
-
-  // Optimize gallery images for mobile and prevent frames
-  const optimizeGalleryForMobile = () => {
-    // Check if we're on mobile
-    const isMobile = window.innerWidth < 576;
     
-    // Adjust gallery container heights for proper aspect ratio
-    if (isMobile) {
-      // Mobile adjustments - taller containers for better visibility
-      document.querySelectorAll('.gallery-main-image').forEach(container => {
-        container.style.height = '300px';
-      });
-      
-      document.querySelectorAll('.gallery-side-images > div').forEach(container => {
-        container.style.height = '250px';
-      });
-    } else {
-      // Desktop - reset to default values
-      document.querySelectorAll('.gallery-main-image').forEach(container => {
-        container.style.height = '500px';
-      });
-      
-      document.querySelectorAll('.gallery-side-images > div').forEach(container => {
-        container.style.height = '240px';
-      });
+    // Set current year in footer
+    const currentYearElement = document.getElementById('current-year');
+    if (currentYearElement) {
+      currentYearElement.textContent = new Date().getFullYear();
     }
     
-    // Make sure all images fill their containers
-    document.querySelectorAll('.gallery-image').forEach(img => {
-      // Add loading="lazy" for better performance
-      img.setAttribute('loading', 'lazy');
+    // Enhance accessibility
+    enhanceAccessibility();
+    
+    // Only add bottom nav on small screens
+    if (window.innerWidth <= 576) {
+      addBottomNav();
+    }
+    
+    // Optimize images - apply lazy loading where needed and convert to next-gen formats
+    document.addEventListener('DOMContentLoaded', function() {
+      if ('loading' in HTMLImageElement.prototype) {
+        // Native lazy loading available
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        lazyImages.forEach(img => {
+          // Ensure all images have width and height set to avoid layout shifts
+          if (!img.getAttribute('width') || !img.getAttribute('height')) {
+            img.setAttribute('width', img.width || 300);
+            img.setAttribute('height', img.height || 200);
+          }
+        });
+      } else {
+        // Fallback for browsers that don't support native lazy loading
+        const lazyLoadScript = document.createElement('script');
+        lazyLoadScript.src = 'https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js';
+        lazyLoadScript.defer = true;
+        lazyLoadScript.onload = function() {
+          const observer = lozad();
+          observer.observe();
+        };
+        document.head.appendChild(lazyLoadScript);
+      }
     });
-  };
-  
-  // Run once on load
-  optimizeGalleryForMobile();
-  
-  // And whenever window resizes
-  window.addEventListener('resize', optimizeGalleryForMobile);
+  }
 
-  // Also handle orientation change for mobile devices
-  window.addEventListener('orientationchange', function() {
-    // Short delay to allow the orientation change to complete
-    setTimeout(function() {
-      optimizeGalleryForMobile();
-    }, 200);
-  });
-});
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
