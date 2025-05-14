@@ -2,123 +2,55 @@
 (function() {
   'use strict';
 
-  // DOM elements cache
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const body = document.body;
-  
-  // Toggle mobile menu function
-  function toggleMobileMenu(event) {
-    if (event) {
-      event.stopPropagation();
-    }
-    
-    const isHidden = mobileMenu.classList.contains('hidden');
-    
-    // Set ARIA attributes for accessibility
-    mobileMenuButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
-    
-    if (isHidden) {
-      mobileMenu.classList.remove('hidden');
-      mobileMenu.classList.add('flex');
-      body.style.overflow = 'hidden';
-
-      mobileMenuButton.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      `;
+  // Only execute when DOM is ready
+  function ready(fn) {
+    if (document.readyState !== 'loading') {
+      fn();
     } else {
-      mobileMenu.classList.add('hidden');
-      mobileMenu.classList.remove('flex');
-      body.style.overflow = '';
-
-      mobileMenuButton.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      `;
+      document.addEventListener('DOMContentLoaded', fn);
     }
   }
 
-  // Handle form submissions
-  function handleFormSubmission(event) {
-    event.preventDefault();
+  ready(function() {
+    // DOM elements cache
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const body = document.body;
     
-    const form = event.target;
-    const submitButton = form.querySelector('button[type="submit"]');
-    
-    if (submitButton) {
-      submitButton.disabled = true;
-      submitButton.textContent = 'Відправляється...';
-    }
-
-    // Form data processing
-    const formData = new FormData(form);
-    const formDataObj = {};
-    formData.forEach((value, key) => {
-      formDataObj[key] = value;
-    });
-
-    // Demo form submission (placeholder)
-    setTimeout(() => {
-      alert("Дякуємо за вашу заявку! Ми зв'яжемося з вами найближчим часом.");
-      form.reset();
+    // Mobile menu toggle function
+    function toggleMobileMenu(event) {
+      if (event) {
+        event.stopPropagation();
+      }
       
-      if (submitButton) {
-        submitButton.disabled = false;
-        submitButton.textContent = 'Відправити заявку';
-      }
-    }, 1000);
-  }
-
-  // Format phone number input
-  function formatPhoneNumber(event) {
-    let value = event.target.value.replace(/\D/g, '');
-    
-    if (value.length > 0) {
-      if (value.length <= 3) {
-        value = value;
-      } else if (value.length <= 6) {
-        value = value.slice(0, 3) + '-' + value.slice(3);
-      } else if (value.length <= 10) {
-        value = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6);
+      const isHidden = mobileMenu.classList.contains('hidden');
+      
+      // Set ARIA attributes for accessibility
+      mobileMenuButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+      
+      if (isHidden) {
+        mobileMenu.classList.remove('hidden');
+        mobileMenu.classList.add('flex');
+        body.style.overflow = 'hidden';
+  
+        mobileMenuButton.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        `;
       } else {
-        value = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6, 10);
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
+        body.style.overflow = '';
+  
+        mobileMenuButton.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        `;
       }
     }
-    
-    event.target.value = value;
-  }
 
-  // Smooth scroll to anchors
-  function handleSmoothScroll(event) {
-    event.preventDefault();
-
-    const targetId = this.getAttribute('href');
-    if (targetId === '#') return;
-
-    const targetElement = document.querySelector(targetId);
-    if (targetElement) {
-      // Close mobile menu if open
-      if (!mobileMenu.classList.contains('hidden')) {
-        toggleMobileMenu();
-      }
-
-      // Calculate position
-      const offset = 60;
-      const elementPosition = targetElement.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-    }
-  }
-
-  // Set up event handlers
-  function init() {
     // Set current year in footer
     const currentYearElement = document.getElementById('current-year');
     if (currentYearElement) {
@@ -147,26 +79,77 @@
     
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', handleSmoothScroll);
+      anchor.addEventListener('click', function(event) {
+        event.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          // Close mobile menu if open
+          if (!mobileMenu.classList.contains('hidden')) {
+            toggleMobileMenu();
+          }
+          
+          // Calculate position
+          const offset = 60;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth',
+          });
+        }
+      });
     });
     
     // Contact form handling
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
-      contactForm.addEventListener('submit', handleFormSubmission);
+      contactForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = 'Відправляється...';
+        }
+        
+        // Form data processing
+        setTimeout(() => {
+          alert("Дякуємо за вашу заявку! Ми зв'яжемося з вами найближчим часом.");
+          contactForm.reset();
+          
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Відправити заявку';
+          }
+        }, 1000);
+      });
       
       // Phone number formatting
       const phoneInput = document.getElementById('phone');
       if (phoneInput) {
-        phoneInput.addEventListener('input', formatPhoneNumber);
+        phoneInput.addEventListener('input', function(event) {
+          let value = event.target.value.replace(/\D/g, '');
+          
+          if (value.length > 0) {
+            if (value.length <= 3) {
+              value = value;
+            } else if (value.length <= 6) {
+              value = value.slice(0, 3) + '-' + value.slice(3);
+            } else if (value.length <= 10) {
+              value = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6);
+            } else {
+              value = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6, 10);
+            }
+          }
+          
+          event.target.value = value;
+        });
       }
     }
-  }
-
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  });
 })();

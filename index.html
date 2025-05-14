@@ -9,34 +9,78 @@
       content="Футбольна команда з України, готова змагатися, конкурувати та прагнути до перемоги."
     />
     
+    <!-- Critical CSS inline -->
+    <style>
+      /* Critical path CSS */
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        min-width: 320px;
+        overflow-x: hidden;
+      }
+      .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+      .hidden { display: none; }
+      .flex { display: flex; }
+      .items-center { align-items: center; }
+      .justify-between { justify-content: space-between; }
+      .flex-col { flex-direction: column; }
+      .space-y-4 > * + * { margin-top: 1rem; }
+      .mt-4 { margin-top: 1rem; }
+      .mb-4 { margin-bottom: 1rem; }
+      .bg-gray-100 { background-color: #F2F4F5; }
+      .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+      .text-xl { font-size: 1.25rem; }
+      .font-bold { font-weight: 700; }
+      .h-6 { height: 1.5rem; }
+      .w-6 { width: 1.5rem; }
+      .hover\:text-gray-600:hover { color: #4b5563; }
+      .text-4xl { font-size: 2.25rem; }
+      @media (min-width: 992px) {
+        .md\:hidden { display: none; }
+        .md\:flex { display: flex; }
+        .md\:text-5xl { font-size: 3rem; }
+      }
+    </style>
+    
     <!-- Preload critical assets -->
     <link rel="preload" href="./styles.css" as="style" />
+    <link rel="preload" href="./fonts/craftwork-grotesk/CraftworkGrotesk-Regular.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="./fonts/craftwork-grotesk/CraftworkGrotesk-Heavy.ttf" as="font" type="font/ttf" crossorigin />
     
-    <!-- Tailwind CSS via CDN with defer -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+    <link rel="preconnect" href="https://placehold.co" />
 
-    <!-- Custom styles -->
-    <link rel="stylesheet" href="./styles.css" />
+    <!-- Custom styles with async loading -->
+    <link rel="stylesheet" href="./styles.css" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="./styles.css" /></noscript>
+    
     <link rel="icon" href="./assets/favicon.png" type="image/png" />
 
-    <!-- Tailwind config -->
+    <!-- Tailwind CSS via CDN with defer -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
+
+    <!-- Inline Tailwind config -->
     <script>
-      if (typeof window.tailwind !== 'undefined') {
-        tailwind.config = {
-          theme: {
-            extend: {
-              screens: {
-                sm: '576px',
-                md: '992px',
-                lg: '1200px',
-              },
-              colors: {
-                'gray-100': '#F2F4F5',
+      window.addEventListener('load', function() {
+        if (typeof window.tailwind !== 'undefined') {
+          tailwind.config = {
+            theme: {
+              extend: {
+                screens: {
+                  sm: '576px',
+                  md: '992px',
+                  lg: '1200px',
+                },
+                colors: {
+                  'gray-100': '#F2F4F5',
+                },
               },
             },
-          },
-        };
-      }
+          };
+        }
+      });
     </script>
   </head>
   <body class="font-craftwork bg-white text-black">
@@ -126,6 +170,8 @@
             class="w-full h-full object-cover"
             width="1400" 
             height="720"
+            loading="eager"
+            fetchpriority="high"
           />
         </div>
       </div>
@@ -351,6 +397,7 @@
               alt="FC Temp team" 
               width="440" 
               height="640"
+              loading="lazy"
             />
           </div>
         </div>
@@ -453,6 +500,7 @@
               class="w-full h-full object-cover"
               width="460"
               height="360"
+              loading="lazy"
             />
           </div>
           <div>
@@ -491,6 +539,7 @@
               class="gallery-image"
               width="550"
               height="500"
+              loading="lazy"
             />
           </div>
 
@@ -503,6 +552,7 @@
                 class="gallery-image"
                 width="500"
                 height="240"
+                loading="lazy"
               />
             </div>
             <div>
@@ -512,6 +562,7 @@
                 class="gallery-image"
                 width="500"
                 height="240"
+                loading="lazy"
               />
             </div>
           </div>
