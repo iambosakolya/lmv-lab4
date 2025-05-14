@@ -2,27 +2,20 @@
 <html lang="uk">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>FC Temp | Футбольний клуб</title>
     <meta
       name="description"
       content="Футбольна команда з України, готова змагатися, конкурувати та прагнути до перемоги."
     />
-    <!-- Preloading critical assets -->
-    <link rel="preload" href="./fonts/craftwork-grotesk/CraftworkGrotesk-Regular.ttf" as="font" type="font/ttf" crossorigin />
-    <link rel="preload" href="./fonts/craftwork-grotesk/CraftworkGrotesk-Medium.ttf" as="font" type="font/ttf" crossorigin />
-    <link rel="preload" href="./fonts/craftwork-grotesk/CraftworkGrotesk-Heavy.ttf" as="font" type="font/ttf" crossorigin />
-    <link rel="preload" href="./styles.css" as="style" />
-    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
-    
-    <!-- Tailwind CSS via CDN with defer -->
-    <script src="https://cdn.tailwindcss.com" defer></script>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Custom styles -->
     <link rel="stylesheet" href="./styles.css" />
     <link rel="icon" href="./assets/favicon.png" type="image/png" />
 
-    <!-- Inline critical Tailwind config to prevent render blocking -->
+    <!-- Tailwind config -->
     <script>
       tailwind.config = {
         theme: {
@@ -46,18 +39,17 @@
       <div class="container mx-auto px-4">
         <div class="flex items-center justify-between">
           <div class="text-xl font-bold">
-            <a href="/" aria-label="FC Temp Home">LOGO</a>
+            <a href="/">LOGO</a>
           </div>
 
           <!-- Mobile menu button -->
-          <button id="mobile-menu-button" class="md:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle menu">
+          <button id="mobile-menu-button" class="md:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              aria-hidden="true"
             >
               <path
                 stroke-linecap="round"
@@ -69,7 +61,7 @@
           </button>
 
           <!-- Desktop navigation -->
-          <nav class="hidden md:flex items-center space-x-6" aria-label="Main navigation">
+          <nav class="hidden md:flex items-center space-x-6">
             <a href="./index.html" class="hover:text-gray-600">ГОЛОВНА</a>
             <a href="./about-us.html" class="hover:text-gray-600">ПРО НАС</a>
             <a href="./achievements.html" class="hover:text-gray-600"
@@ -77,7 +69,7 @@
             >
             <a href="#" class="hover:text-gray-600">СТАТИСТИКА МАТЧІВ</a>
             <div class="flex items-center ml-4">
-              <button class="flex items-center" aria-label="Змінити мову">
+              <button class="flex items-center">
                 <span>UA</span>
               </button>
             </div>
@@ -88,7 +80,6 @@
         <nav
           id="mobile-menu"
           class="hidden mt-4 md:hidden flex flex-col space-y-4"
-          aria-label="Mobile navigation"
         >
           <a href="/index.html" class="hover:text-gray-600">ГОЛОВНА</a>
           <a href="./about-us.html" class="hover:text-gray-600">ПРО НАС</a>
@@ -96,11 +87,8 @@
             >ДОСЯГНЕННЯ</a
           >
           <a href="#" class="hover:text-gray-600">СТАТИСТИКА МАТЧІВ</a>
-          <a href="tel:+380123456789" class="hover:text-gray-600 phone-number">
-            +38 (012) 345-67-89
-          </a>
           <div class="flex items-center mt-4">
-            <button class="flex items-center" aria-label="Змінити мову">
+            <button class="flex items-center">
               <span>UA</span>
             </button>
           </div>
@@ -122,12 +110,9 @@
           class="w-full h-64 md:h-96 bg-gray-200 flex items-center justify-center"
         >
           <img
-            src="./assets/placeholder.webp"
+            src="https://placehold.co/1400x720/png"
             alt="FC Temp team"
             class="w-full h-full object-cover"
-            width="1400" 
-            height="720"
-            loading="lazy"
           />
         </div>
       </div>
@@ -176,7 +161,6 @@
           <div class="flex flex-col items-center text-center">
             <div
               class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-4"
-              aria-hidden="true"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -200,7 +184,6 @@
           <div class="flex flex-col items-center text-center">
             <div
               class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-4"
-              aria-hidden="true"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -224,7 +207,6 @@
           <div class="flex flex-col items-center text-center">
             <div
               class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-4"
-              aria-hidden="true"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -250,16 +232,14 @@
           <a
             href="#"
             class="border border-black px-4 py-2 inline-flex items-center"
-            aria-label="Дізнатися більше про принципи"
           >
             Дізнатися
           </a>
           <a
             href="#"
             class="border border-black px-4 py-2 inline-flex items-center"
-            aria-label="Зв'язатися з нами"
           >
-            Зв'язатися <span class="ml-2" aria-hidden="true">→</span>
+            Зв'язатися <span class="ml-2">→</span>
           </a>
         </div>
       </div>
@@ -283,7 +263,7 @@
         <div class="grid md:grid-cols-3 gap-8">
           <!-- Column 1 -->
           <div class="flex flex-col justify-center h-full">
-            <div class="mb-4" aria-hidden="true">
+            <div class="mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-10 w-10 border-2 border-black rounded-full p-2"
@@ -308,7 +288,6 @@
               <a
                 href="#"
                 class="border border-black px-4 py-2 inline-block hover-grow"
-                aria-label="Дізнатись про наші цілі"
                 >Дізнатись</a
               >
             </div>
@@ -316,7 +295,7 @@
 
           <!-- Column 2 -->
           <div class="flex flex-col justify-center h-full">
-            <div class="mb-4" aria-hidden="true">
+            <div class="mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-10 w-10 border-2 border-black rounded-full p-2"
@@ -342,21 +321,14 @@
               <a
                 href="#"
                 class="border border-black px-4 py-2 inline-block hover-grow"
-                aria-label="Переглянути наші досягнення"
-                >Переглянути <span aria-hidden="true">→</span></a
+                >Переглянути →</a
               >
             </div>
           </div>
 
           <!-- Column 3 - Image -->
           <div class="h-640 flex items-center justify-center">
-            <img 
-              src="./assets/placeholder.webp" 
-              alt="FC Temp team" 
-              width="440" 
-              height="640"
-              loading="lazy"
-            />
+            <img src="https://placehold.co/440x640/png" alt="FC Temp team" />
           </div>
         </div>
       </div>
@@ -370,7 +342,6 @@
             <div class="flex items-center space-x-4 mb-6">
               <div
                 class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center"
-                aria-hidden="true"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -405,15 +376,13 @@
               <a
                 href="#"
                 class="border border-black px-4 py-2 inline-block mr-2"
-                aria-label="Дізнатися про наше місто"
                 >Дізнатися</a
               >
               <a
                 href="#"
                 class="border border-black px-4 py-2 inline-flex items-center"
-                aria-label="Переглянути інформацію про наше місто"
               >
-                Переглянути <span class="ml-2" aria-hidden="true">→</span>
+                Переглянути <span class="ml-2">→</span>
               </a>
             </div>
           </div>
@@ -421,7 +390,6 @@
             <div class="flex items-center space-x-4 mb-6">
               <div
                 class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center"
-                aria-hidden="true"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -457,12 +425,9 @@
         <div class="grid md:grid-cols-2 gap-8 items-center">
           <div class="bg-gray-200 h-[360px] flex items-center justify-center">
             <img
-              src="./assets/placeholder.webp"
+              src="https://placehold.co/460x360/png"
               alt="Join FC Temp"
               class="w-full h-full object-cover"
-              width="460"
-              height="360"
-              loading="lazy"
             />
           </div>
           <div>
@@ -472,10 +437,10 @@
               чекаємо на вас!
             </p>
             <div class="flex space-x-4">
-              <a href="#" class="bg-black text-white px-4 py-2 inline-block" aria-label="Приєднатися до FC Temp"
+              <a href="#" class="bg-black text-white px-4 py-2 inline-block"
                 >JOIN</a
               >
-              <a href="#" class="border border-black px-4 py-2 inline-block" aria-label="Дізнатися більше про приєднання"
+              <a href="#" class="border border-black px-4 py-2 inline-block"
                 >Learn More</a
               >
             </div>
@@ -492,46 +457,37 @@
           Переглянути найкращі моменти команди "Темп".
         </p>
 
-        <div class="grid grid-cols-2 gap-4 gallery-grid">
+        <div class="grid grid-cols-2 gap-4">
           <!-- Left column - tall image -->
-          <div class="row-span-2 gallery-main-image">
+          <div class="row-span-2 bg-gray-200 h-[815px]">
             <img
-              src="./assets/placeholder.webp"
-              alt="FC Temp команда на полі"
-              class="gallery-image"
-              width="550"
-              height="500"
-              loading="lazy"
+              src="https://placehold.co/550x830/png"
+              alt="FC Temp gallery"
+              class="w-full h-full object-cover"
             />
           </div>
 
           <!-- Right column - two images -->
-          <div class="grid grid-rows-2 gap-4 gallery-side-images">
-            <div>
+          <div class="grid grid-rows-2 gap-4">
+            <div class="bg-gray-200 h-[400px]">
               <img
-                src="./assets/placeholder.webp"
-                alt="FC Temp тренування"
-                class="gallery-image"
-                width="500"
-                height="240"
-                loading="lazy"
+                src="https://placehold.co/672x400/png"
+                alt="FC Temp gallery"
+                class="w-full h-full object-cover"
               />
             </div>
-            <div>
+            <div class="bg-gray-200 h-[400px]">
               <img
-                src="./assets/placeholder.webp"
-                alt="FC Temp команда святкує"
-                class="gallery-image"
-                width="500"
-                height="240"
-                loading="lazy"
+                src="https://placehold.co/672x400/png"
+                alt="FC Temp gallery"
+                class="w-full h-full object-cover"
               />
             </div>
           </div>
         </div>
 
         <div class="mt-8 text-center">
-          <a href="#" class="bg-black text-white px-8 py-3 inline-block text-lg" aria-label="Переглянути більше зображень"
+          <a href="#" class="bg-black text-white px-8 py-2 inline-block"
             >Більше</a
           >
         </div>
@@ -618,7 +574,7 @@
 
             <button
               type="submit"
-              class="w-full bg-black text-white py-4 font-medium hover:bg-gray-800 transition-colors text-lg"
+              class="w-full bg-black text-white py-3 font-medium hover:bg-gray-800 transition-colors"
             >
               Відправити заявку
             </button>
@@ -634,9 +590,9 @@
           class="flex flex-col md:flex-row justify-between items-center mb-8"
         >
           <div class="mb-4 md:mb-0">
-            <a href="/" class="text-xl font-bold" aria-label="FC Temp Home">Logo</a>
+            <a href="/" class="text-xl font-bold">Logo</a>
           </div>
-          <nav class="flex flex-wrap gap-6" aria-label="Footer navigation">
+          <nav class="flex flex-wrap gap-6">
             <a href="/index.html" class="hover:text-gray-600">ГОЛОВНА</a>
             <a href="./about-us.html" class="hover:text-gray-600">ПРО НАС</a>
             <a href="./achievements.html" class="hover:text-gray-600"
@@ -646,7 +602,7 @@
             <a href="#" class="hover:underline">Контакти</a>
           </nav>
           <div class="flex space-x-4 mt-4 md:mt-0">
-            <a href="#" class="hover:text-gray-600" aria-label="Facebook">
+            <a href="#" class="hover:text-gray-600">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -658,14 +614,13 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 class="feather feather-facebook"
-                aria-hidden="true"
               >
                 <path
                   d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
                 ></path>
               </svg>
             </a>
-            <a href="#" class="hover:text-gray-600" aria-label="Instagram">
+            <a href="#" class="hover:text-gray-600">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -677,7 +632,6 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 class="feather feather-instagram"
-                aria-hidden="true"
               >
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                 <path
@@ -686,7 +640,7 @@
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
               </svg>
             </a>
-            <a href="#" class="hover:text-gray-600" aria-label="Twitter">
+            <a href="#" class="hover:text-gray-600">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -698,14 +652,13 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 class="feather feather-twitter"
-                aria-hidden="true"
               >
                 <path
                   d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
                 ></path>
               </svg>
             </a>
-            <a href="#" class="hover:text-gray-600" aria-label="YouTube">
+            <a href="#" class="hover:text-gray-600">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -717,7 +670,6 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 class="feather feather-youtube"
-                aria-hidden="true"
               >
                 <path
                   d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"
@@ -744,6 +696,6 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="./script.js"></script>
+    <script src="../script.js"></script>
   </body>
 </html>
