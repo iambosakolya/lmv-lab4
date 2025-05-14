@@ -2,13 +2,17 @@
 <html lang="uk">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <title>FC Temp | Футбольний клуб</title>
     <meta
       name="description"
       content="Футбольна команда з України, готова змагатися, конкурувати та прагнути до перемоги."
     />
-    <!-- Tailwind CSS via CDN -->
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="./styles.css" as="style" />
+    
+    <!-- Tailwind CSS via CDN with defer -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Custom styles -->
@@ -17,20 +21,22 @@
 
     <!-- Tailwind config -->
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            screens: {
-              sm: '576px',
-              md: '992px',
-              lg: '1200px',
-            },
-            colors: {
-              'gray-100': '#F2F4F5',
+      if (typeof window.tailwind !== 'undefined') {
+        tailwind.config = {
+          theme: {
+            extend: {
+              screens: {
+                sm: '576px',
+                md: '992px',
+                lg: '1200px',
+              },
+              colors: {
+                'gray-100': '#F2F4F5',
+              },
             },
           },
-        },
-      };
+        };
+      }
     </script>
   </head>
   <body class="font-craftwork bg-white text-black">
@@ -39,17 +45,18 @@
       <div class="container mx-auto px-4">
         <div class="flex items-center justify-between">
           <div class="text-xl font-bold">
-            <a href="/">LOGO</a>
+            <a href="/" aria-label="FC Temp Home">LOGO</a>
           </div>
 
           <!-- Mobile menu button -->
-          <button id="mobile-menu-button" class="md:hidden">
+          <button id="mobile-menu-button" class="md:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle menu">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              aria-hidden="true"
             >
               <path
                 stroke-linecap="round"
@@ -61,7 +68,7 @@
           </button>
 
           <!-- Desktop navigation -->
-          <nav class="hidden md:flex items-center space-x-6">
+          <nav class="hidden md:flex items-center space-x-6" aria-label="Main navigation">
             <a href="./index.html" class="hover:text-gray-600">ГОЛОВНА</a>
             <a href="./about-us.html" class="hover:text-gray-600">ПРО НАС</a>
             <a href="./achievements.html" class="hover:text-gray-600"
@@ -69,7 +76,7 @@
             >
             <a href="#" class="hover:text-gray-600">СТАТИСТИКА МАТЧІВ</a>
             <div class="flex items-center ml-4">
-              <button class="flex items-center">
+              <button class="flex items-center" aria-label="Змінити мову">
                 <span>UA</span>
               </button>
             </div>
@@ -80,6 +87,7 @@
         <nav
           id="mobile-menu"
           class="hidden mt-4 md:hidden flex flex-col space-y-4"
+          aria-label="Mobile navigation"
         >
           <a href="/index.html" class="hover:text-gray-600">ГОЛОВНА</a>
           <a href="./about-us.html" class="hover:text-gray-600">ПРО НАС</a>
@@ -87,8 +95,11 @@
             >ДОСЯГНЕННЯ</a
           >
           <a href="#" class="hover:text-gray-600">СТАТИСТИКА МАТЧІВ</a>
+          <a href="tel:+380123456789" class="hover:text-gray-600 phone-number">
+            +38 (012) 345-67-89
+          </a>
           <div class="flex items-center mt-4">
-            <button class="flex items-center">
+            <button class="flex items-center" aria-label="Змінити мову">
               <span>UA</span>
             </button>
           </div>
@@ -113,6 +124,8 @@
             src="https://placehold.co/1400x720/png"
             alt="FC Temp team"
             class="w-full h-full object-cover"
+            width="1400" 
+            height="720"
           />
         </div>
       </div>
@@ -120,7 +133,7 @@
 
     <!-- Join Section -->
     <section class="py-16 bg-gray-100">
-      <div class="container mx-auto px-4">
+      <div class="container mx-auto px-24">
         <div class="grid md:grid-cols-2 gap-8">
           <div>
             <h2 class="text-2xl font-bold mb-4">
@@ -161,6 +174,7 @@
           <div class="flex flex-col items-center text-center">
             <div
               class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-4"
+              aria-hidden="true"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -231,15 +245,17 @@
         <div class="mt-12 flex flex-wrap gap-4 justify-center">
           <a
             href="#"
-            class="border border-black px-4 py-2 inline-flex items-center"
+            class="border border-black px-4 py-2 inline-flex items-center min-w-[150px] min-h-[48px] justify-center"
+            aria-label="Дізнатися більше про принципи"
           >
             Дізнатися
           </a>
           <a
             href="#"
-            class="border border-black px-4 py-2 inline-flex items-center"
+            class="border border-black px-4 py-2 inline-flex items-center min-w-[150px] min-h-[48px] justify-center"
+            aria-label="Зв'язатися з нами"
           >
-            Зв'язатися <span class="ml-2">→</span>
+            Зв'язатися <span class="ml-2" aria-hidden="true">→</span>
           </a>
         </div>
       </div>
@@ -263,7 +279,7 @@
         <div class="grid md:grid-cols-3 gap-8">
           <!-- Column 1 -->
           <div class="flex flex-col justify-center h-full">
-            <div class="mb-4">
+            <div class="mb-4" aria-hidden="true">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-10 w-10 border-2 border-black rounded-full p-2"
@@ -287,7 +303,8 @@
             <div class="flex space-x-2">
               <a
                 href="#"
-                class="border border-black px-4 py-2 inline-block hover-grow"
+                class="border border-black px-4 py-2 inline-block hover-grow min-w-[120px] min-h-[48px] flex items-center justify-center"
+                aria-label="Дізнатись про наші цілі"
                 >Дізнатись</a
               >
             </div>
@@ -295,7 +312,7 @@
 
           <!-- Column 2 -->
           <div class="flex flex-col justify-center h-full">
-            <div class="mb-4">
+            <div class="mb-4" aria-hidden="true">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-10 w-10 border-2 border-black rounded-full p-2"
@@ -320,15 +337,21 @@
             <div class="flex space-x-2">
               <a
                 href="#"
-                class="border border-black px-4 py-2 inline-block hover-grow"
-                >Переглянути →</a
+                class="border border-black px-4 py-2 inline-block hover-grow min-w-[120px] min-h-[48px] flex items-center justify-center"
+                aria-label="Переглянути наші досягнення"
+                >Переглянути <span aria-hidden="true">→</span></a
               >
             </div>
           </div>
 
           <!-- Column 3 - Image -->
           <div class="h-640 flex items-center justify-center">
-            <img src="https://placehold.co/440x640/png" alt="FC Temp team" />
+            <img 
+              src="https://placehold.co/440x640/png" 
+              alt="FC Temp team" 
+              width="440" 
+              height="640"
+            />
           </div>
         </div>
       </div>
@@ -428,6 +451,8 @@
               src="https://placehold.co/460x360/png"
               alt="Join FC Temp"
               class="w-full h-full object-cover"
+              width="460"
+              height="360"
             />
           </div>
           <div>
@@ -437,10 +462,10 @@
               чекаємо на вас!
             </p>
             <div class="flex space-x-4">
-              <a href="#" class="bg-black text-white px-4 py-2 inline-block"
+              <a href="#" class="bg-black text-white px-4 py-2 inline-block min-w-[100px] min-h-[48px] flex items-center justify-center" aria-label="Приєднатися до FC Temp"
                 >JOIN</a
               >
-              <a href="#" class="border border-black px-4 py-2 inline-block"
+              <a href="#" class="border border-black px-4 py-2 inline-block min-w-[120px] min-h-[48px] flex items-center justify-center" aria-label="Дізнатися більше про приєднання"
                 >Learn More</a
               >
             </div>
@@ -457,37 +482,43 @@
           Переглянути найкращі моменти команди "Темп".
         </p>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-2 gap-4 gallery-grid">
           <!-- Left column - tall image -->
-          <div class="row-span-2 bg-gray-200 h-[815px]">
+          <div class="row-span-2 gallery-main-image">
             <img
-              src="https://placehold.co/550x830/png"
-              alt="FC Temp gallery"
-              class="w-full h-full object-cover"
+              src="https://placehold.co/550x500/png"
+              alt="FC Temp команда на полі"
+              class="gallery-image"
+              width="550"
+              height="500"
             />
           </div>
 
           <!-- Right column - two images -->
-          <div class="grid grid-rows-2 gap-4">
-            <div class="bg-gray-200 h-[400px]">
+          <div class="grid grid-rows-2 gap-4 gallery-side-images">
+            <div>
               <img
-                src="https://placehold.co/672x400/png"
-                alt="FC Temp gallery"
-                class="w-full h-full object-cover"
+                src="https://placehold.co/500x240/png"
+                alt="FC Temp тренування"
+                class="gallery-image"
+                width="500"
+                height="240"
               />
             </div>
-            <div class="bg-gray-200 h-[400px]">
+            <div>
               <img
-                src="https://placehold.co/672x400/png"
-                alt="FC Temp gallery"
-                class="w-full h-full object-cover"
+                src="https://placehold.co/500x240/png"
+                alt="FC Temp команда святкує"
+                class="gallery-image"
+                width="500"
+                height="240"
               />
             </div>
           </div>
         </div>
 
         <div class="mt-8 text-center">
-          <a href="#" class="bg-black text-white px-8 py-2 inline-block"
+          <a href="#" class="bg-black text-white px-8 py-3 inline-block text-lg min-w-[120px] min-h-[48px] flex items-center justify-center" aria-label="Переглянути більше зображень"
             >Більше</a
           >
         </div>
@@ -511,7 +542,6 @@
                 type="text"
                 id="name"
                 name="name"
-                autocomplete="name"
                 required
                 class="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
               />
@@ -523,7 +553,6 @@
                 type="email"
                 id="email"
                 name="email"
-                autocomplete="email"
                 required
                 class="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
               />
@@ -537,9 +566,6 @@
                 type="tel"
                 id="phone"
                 name="phone"
-                autocomplete="tel"
-                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                placeholder="000-000-0000"
                 class="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
               />
             </div>
@@ -590,9 +616,9 @@
           class="flex flex-col md:flex-row justify-between items-center mb-8"
         >
           <div class="mb-4 md:mb-0">
-            <a href="/" class="text-xl font-bold">Logo</a>
+            <a href="/" class="text-xl font-bold" aria-label="FC Temp Home">Logo</a>
           </div>
-          <nav class="flex flex-wrap gap-6">
+          <nav class="flex flex-wrap gap-6" aria-label="Footer navigation">
             <a href="/index.html" class="hover:text-gray-600">ГОЛОВНА</a>
             <a href="./about-us.html" class="hover:text-gray-600">ПРО НАС</a>
             <a href="./achievements.html" class="hover:text-gray-600"
@@ -602,7 +628,7 @@
             <a href="#" class="hover:underline">Контакти</a>
           </nav>
           <div class="flex space-x-4 mt-4 md:mt-0">
-            <a href="#" class="hover:text-gray-600">
+            <a href="#" class="hover:text-gray-600 min-w-[48px] min-h-[48px] flex items-center justify-center" aria-label="Facebook">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -614,13 +640,14 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 class="feather feather-facebook"
+                aria-hidden="true"
               >
                 <path
                   d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
                 ></path>
               </svg>
             </a>
-            <a href="#" class="hover:text-gray-600">
+            <a href="#" class="hover:text-gray-600 min-w-[48px] min-h-[48px] flex items-center justify-center" aria-label="Instagram">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -632,6 +659,7 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 class="feather feather-instagram"
+                aria-hidden="true"
               >
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                 <path
@@ -640,7 +668,7 @@
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
               </svg>
             </a>
-            <a href="#" class="hover:text-gray-600">
+            <a href="#" class="hover:text-gray-600 min-w-[48px] min-h-[48px] flex items-center justify-center" aria-label="Twitter">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -652,13 +680,14 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 class="feather feather-twitter"
+                aria-hidden="true"
               >
                 <path
                   d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
                 ></path>
               </svg>
             </a>
-            <a href="#" class="hover:text-gray-600">
+            <a href="#" class="hover:text-gray-600 min-w-[48px] min-h-[48px] flex items-center justify-center" aria-label="YouTube">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -670,6 +699,7 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 class="feather feather-youtube"
+                aria-hidden="true"
               >
                 <path
                   d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"
@@ -684,7 +714,7 @@
 
         <div class="border-t border-gray-200 pt-6 text-sm text-gray-500">
           <div class="flex flex-col md:flex-row justify-between">
-            <p>&copy; 2025 Темп. Всі права захищені.</p>
+            <p>&copy; <span id="current-year">2025</span> Темп. Всі права захищені.</p>
             <div class="flex space-x-4 mt-2 md:mt-0">
               <a href="#" class="hover:underline">Політика конфіденційності</a>
               <a href="#" class="hover:underline">Умови обслуговування</a>
@@ -696,6 +726,6 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="../script.js"></script>
+    <script src="./script.js" defer></script>
   </body>
 </html>
